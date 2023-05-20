@@ -37,6 +37,7 @@ group :development, :test do
   gem "standard"
   gem "standard-performance"
   gem "standard-rails"
+  gem "bullet"
 end
 
 group :development do
