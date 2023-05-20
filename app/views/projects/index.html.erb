@@ -1,2 +1,19 @@
-<h1>Projects#index</h1>
-<p>Find me in app/views/projects/index.html.erb</p>
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <%= image_tag("favicon.png", width: "24", height: "24") %>
+    </a>
+
+    <%= form_with url: projects_path, class: "d-flex" do |form| %>
+      <%= form.text_field :name, class: "form-control me-2", placeholder: "Enter name...", required: true %>
+
+      <button class="btn btn-primary text-nowrap" type="submit">
+        <i class="bi bi-journal-plus"></i> New project
+      </button>
+    <% end %>
+  </div>
+</nav>
+
+<div class="alert alert-info">
+  <i class="bi bi-info-circle"></i> No projects yet. Create one to get started.
+</div>
