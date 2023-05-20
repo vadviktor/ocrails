@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: one
+  text: MyText
+  svg_polygon_points: MyString
+
+two:
+  image: two
+  text: MyText
+  svg_polygon_points: MyString
