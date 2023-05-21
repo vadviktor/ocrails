@@ -100,17 +100,11 @@
     <orderEntry type="library" scope="PROVIDED" name="rubocop-rails (v2.19.1, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-progressbar (v1.13.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-vips (v2.1.4, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sass-rails (v6.0.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sassc-rails (v2.1.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.2.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.4.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="standard (v1.28.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="standard-custom (v1.0.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="standard-performance (v1.0.1, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="standard-rails (v0.1.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.2.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="tilt (v2.1.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timeout (v0.3.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.6, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v2.4.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
