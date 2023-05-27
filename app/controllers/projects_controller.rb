@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    raise NotImplementedError
+    @project = Project.find(params[:id])
   end
 
   def create
