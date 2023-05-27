@@ -5,7 +5,11 @@
     </a>
 
     <%= form_with model: @new_project, class: "d-flex" do |form| %>
-      <%= form.text_field :name, class: "form-control me-2", placeholder: "Enter name...", required: true %>
+      <div class="input-group has-validation">
+        <%= form.text_field :name,
+                            class: "form-control me-2 #{@project&.errors&.any? { |e| e.attribute == :internal_id } ? 'is-invalid' : ''}",
+                            placeholder: "Enter name...", required: true %>
+      </div>
 
       <button class="btn btn-primary text-nowrap" type="submit">
         <i class="bi bi-journal-plus"></i> New project
@@ -22,7 +26,7 @@
 
     <ul class="list-group list-group-flush">
       <% @project.errors.each do |error| %>
-        <li class="list-group-item list-group-item-danger"><%= error.full_message %></li>
+        <li class="list-group-item list-group-item-danger"><%= error.message %></li>
       <% end %>
     </ul>
   </div>
@@ -51,9 +55,10 @@
         </td>
         <td><%= project.created_at.strftime("%B %d, %Y") %></td>
         <td class="text-end">
-          <%= link_to project_path(project), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" do %>
+          <%= form_with model: @project, method: :delete %>
+          <button type="submit" class="btn btn-sm btn-outline-danger">
             <i class="bi bi-trash"></i> Delete
-          <% end %>
+          </button>
         </td>
       </tr>
     <% end %>
