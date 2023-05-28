@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  has_one_attached :image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [100, 100]
+  has_many_attached :images do |attachable|
+    attachable.variant :thumb, resize_to_limit: [150, 150]
   end
 
   validates_presence_of :name, :internal_id

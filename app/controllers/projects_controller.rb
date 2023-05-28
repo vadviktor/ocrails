@@ -19,6 +19,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find(params[:id])
+    images = project_params[:images]
+    if @project.images.attach(images)
+      redirect_to project_path(@project)
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     raise NotImplementedError
   end
@@ -26,6 +36,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit(:name, images: [])
   end
 end

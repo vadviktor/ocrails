@@ -1,5 +1,20 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
+<nav class="navbar bg-light mb-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/favicon.png" width="24" height="24" class="me-3">
+      <%= @project.name %>
+    </a>
+  </div>
+</nav>
 
+<%= form_with model: @project, class: "mb-5" do |f| %>
+  <div class="mb-3">
+    <%= f.label :images, class: 'col-form-label' %>
+    <%= f.file_field :images, multiple: true, class: 'form-control' %>
+  </div>
+  <%= f.submit "Process images", class: "btn btn-primary" %>
+<% end %>
 
-<%= @project.internal_id %>
+<% @project.images.includes(:blob).each do |image| %>
+  <%= image_tag image.variant(:thumb).processed.url %>
+<% end %>
