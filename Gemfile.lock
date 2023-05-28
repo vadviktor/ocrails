@@ -82,6 +82,9 @@ GEM
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
+    aws-sdk-textract (1.45.0)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sigv4 (~> 1.1)
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bindex (0.8.1)
@@ -246,6 +249,7 @@ PLATFORMS
 DEPENDENCIES
   amazing_print
   aws-sdk-s3
+  aws-sdk-textract
   bullet
   debug
   image_processing
