@@ -7,14 +7,16 @@
   </div>
 </nav>
 
+<%= render partial: 'shared/errors', locals: { model: @project } %>
+
 <%= form_with model: @project, class: "mb-5" do |f| %>
   <div class="mb-3">
     <%= f.label :images, class: 'col-form-label' %>
     <%= f.file_field :images, multiple: true, class: 'form-control' %>
   </div>
-  <%= f.submit "Process images", class: "btn btn-primary" %>
+  <%= f.submit "Upload and process images", class: "btn btn-primary" %>
 <% end %>
 
-<% @project.images.includes(:blob).each do |image| %>
+<% @project.reload.images.includes(:blob).find_each do |image| %>
   <%= image_tag image.variant(:thumb).processed.url %>
 <% end %>

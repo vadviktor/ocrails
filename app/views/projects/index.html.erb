@@ -18,19 +18,7 @@
   </div>
 </nav>
 
-<% if @project&.errors.present? %>
-  <div class="alert alert-danger" role="alert">
-    <h4 class="alert-heading">
-      <i class="bi bi-exclamation-triangle-fill me-2"></i> Error
-    </h4>
-
-    <ul class="list-group list-group-flush">
-      <% @project.errors.each do |error| %>
-        <li class="list-group-item list-group-item-danger"><%= error.message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render partial: 'shared/errors', locals: { model: @project } %>
 
 <% if @projects.blank? %>
   <div class="alert alert-info">
@@ -46,7 +34,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @projects.each do |project| %>
+    <% @projects.find_each do |project| %>
       <tr>
         <td>
           <%= link_to project_path(project), class: "btn btn-sm btn-outline-secondary text-wrap" do %>
