@@ -20,11 +20,7 @@
 
 <%= render partial: 'shared/errors', locals: { model: @project } %>
 
-<% if @projects.blank? %>
-  <div class="alert alert-info">
-    <i class="bi bi-info-circle"></i> No projects yet. Create one to get started.
-  </div>
-<% else %>
+<% if @projects.present? %>
   <table class="table table-hover table-striped">
     <thead>
     <tr>
@@ -53,4 +49,8 @@
     <% end %>
     </tbody>
   </table>
+<% else %>
+  <div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No projects yet. Create one to get started.
+  </div>
 <% end %>

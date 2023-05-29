@@ -4,19 +4,90 @@
       <img src="/favicon.png" width="24" height="24" class="me-3">
       <%= @project.name %>
     </a>
+
+    <% if @project.images.any? %>
+      <button class="btn btn-outline-dark text-nowrap" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDocuments">
+        <i class="bi bi-images"></i>
+      </button>
+    <% end %>
+
+    <%= form_with model: @project, class: "d-flex" do |f| %>
+      <div class="input-group">
+        <%= f.file_field :images, multiple: true, class: 'form-control me-2' %>
+      </div>
+      <button class="btn btn-primary text-nowrap" type="submit">
+        <i class="bi bi-plus-square-fill"></i> Upload
+      </button>
+    <% end %>
   </div>
 </nav>
 
 <%= render partial: 'shared/errors', locals: { model: @project } %>
 
-<%= form_with model: @project, class: "mb-5" do |f| %>
-  <div class="mb-3">
-    <%= f.label :images, class: 'col-form-label' %>
-    <%= f.file_field :images, multiple: true, class: 'form-control' %>
+<% target_width = BigDecimal(500) %>
+
+<% if @project.images.any? %>
+  <% @project.images.processed.find_each do |image| %>
+
+    <div style="--bs-offcanvas-width: 15rem;" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDocuments">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Documents</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="card" style="max-width: 10rem;">
+        <div class="card-header"><%= image.document.blob.filename %></div>
+        <%= image_tag image.document.variant(:thumb).processed.url, class: 'card-img-top' %>
+        <div class="card-footer row">
+          <div class="col-6">
+            <button type="button" class="btn btn-outline-dark">
+              <i class="bi bi-file-arrow-up-fill"></i>
+            </button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-outline-dark">
+              <i class="bi bi-file-arrow-down-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% target_width_ratio = target_width / image.document.metadata["width"] %>
+    <% image_display_width = (image.document.metadata["width"] * target_width_ratio).round %>
+    <% image_display_height = (image.document.metadata["height"] * target_width_ratio).round %>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="img-overlay-wrap">
+          <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{image_display_width}px;" %>
+          <svg width="<%= image_display_width %>" height="<%= image_display_height %>">
+            <% image.texts.find_each do |text| %>
+              <polygon class="svg-box"
+                       transform="scale(<%= target_width_ratio %>)"
+                       points="<%= text.svg_polygon_points %>"/>
+            <% end %>
+          </svg>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <ul class="list-group">
+          <% image.texts.find_each do |text| %>
+            <li class="list-group-item"><%= text.text %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+  <% end %>
+
+  <button type="submit" class="btn btn-sm btn-outline-danger">
+    <i class="bi bi-trash"></i> Delete
+  </button>
+<% else %>
+  <div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No documents yet. Upload one to get started.
   </div>
-  <%= f.submit "Upload and process images", class: "btn btn-primary" %>
 <% end %>
 
-<% @project.images.find_each do |image| %>
-  <%= image_tag image.document.variant(:thumb).processed.url %>
-<% end %>
+<div class="mb-5"></div>

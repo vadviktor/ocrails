@@ -3,11 +3,13 @@ class Image < ApplicationRecord
   has_many :texts, dependent: :destroy
 
   has_one_attached :document do |attachable|
-    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :thumb, resize_to_limit: [150, 150]
   end
 
   validate :document_maximum_size
   after_validation :clean_up_documents
+
+  scope :processed, -> { where(text_extracted: true) }
 
   private
 
