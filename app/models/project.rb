@@ -3,6 +3,7 @@ class Project < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [150, 150]
   end
 
+  has_many :texts, dependent: :destroy
   validates_presence_of :name, :internal_id
   validates_uniqueness_of :internal_id, message: ->(object, data) { "Project name #{data[:value]} (or a very similar) is already taken." }
   validate :image_maximum_size

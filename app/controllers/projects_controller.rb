@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      redirect_to root_path
+      redirect_to projects_path
     else
       @projects = Project.order(created_at: :desc)
       @new_project = Project.new
@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     if images.blank?
       redirect_to project_path(@project)
     elsif @project.images.attach(images)
-      images.each { |i| ExtractTextFromImageJob.perform_later(i) }
+      ExtractTextFromImagesJob.perform_later(@project.id)
       redirect_to project_path(@project)
     else
       render :show, status: :unprocessable_entity
@@ -33,7 +33,9 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    raise NotImplementedError
+    project = Project.find(params[:id])
+    project.destroy
+    redirect_to projects_path, status: :see_other
   end
 
   private

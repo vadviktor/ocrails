@@ -43,10 +43,11 @@
         </td>
         <td><%= project.created_at.strftime("%B %d, %Y") %></td>
         <td class="text-end">
-          <%= form_with model: @project, method: :delete %>
-          <button type="submit" class="btn btn-sm btn-outline-danger">
-            <i class="bi bi-trash"></i> Delete
-          </button>
+          <%= form_with model: project, method: :delete do %>
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          <% end %>
         </td>
       </tr>
     <% end %>
