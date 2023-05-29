@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
         image.document.attach(ui)
         image.save!
       end
-      ExtractTextFromImagesJob.perform_later(@project.id)
+      ExtractTextFromImagesJob.perform_now(@project.id)
     end
 
     redirect_to project_path(@project)
