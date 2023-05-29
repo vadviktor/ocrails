@@ -1,5 +1,5 @@
 class Text < ApplicationRecord
-  belongs_to :project
+  belongs_to :image
 
   validates :text, :svg_polygon_points, presence: true
 end

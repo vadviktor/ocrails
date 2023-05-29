@@ -17,6 +17,6 @@
   <%= f.submit "Upload and process images", class: "btn btn-primary" %>
 <% end %>
 
-<% @project.reload.images.includes(:blob).find_each do |image| %>
-  <%= image_tag image.variant(:thumb).processed.url %>
+<% @project.images.find_each do |image| %>
+  <%= image_tag image.document.variant(:thumb).processed.url %>
 <% end %>

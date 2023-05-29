@@ -21,15 +21,17 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    images = project_params[:images].reject(&:blank?)
-    if images.blank?
-      redirect_to project_path(@project)
-    elsif @project.images.attach(images)
+    uploaded_images = project_params[:images].reject(&:blank?)
+    if uploaded_images.present?
+      uploaded_images.each do |ui|
+        image = Image.new(project: @project)
+        image.document.attach(ui)
+        image.save!
+      end
       ExtractTextFromImagesJob.perform_later(@project.id)
-      redirect_to project_path(@project)
-    else
-      render :show, status: :unprocessable_entity
     end
+
+    redirect_to project_path(@project)
   end
 
   def destroy

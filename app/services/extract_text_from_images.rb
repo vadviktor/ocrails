@@ -1,38 +1,42 @@
-# require 'aws-sdk-textract'
+require "aws-sdk-textract"
 
 class ExtractTextFromImages
   def initialize(project_id)
-    p = Project.find(project_id)
-    p.images
-    @active_storage_attachment = active_storage_attachment
+    @project = Project.find(project_id)
   end
 
   def run
-    image.analyze unless image.analyzed?
-    lines = detected_text.blocks.select { |b| b.block_type == "LINE" }
-
-    lines.each do |line|
-      polygon_points = line.geometry.polygon.map { |p| [p.x, p.y] }
-      svg_coordinates = polygon_points.map do |p|
-        [
-          (p[0] * image.blob.metadata["width"]).round,
-          (p[1] * image.blob.metadata["height"]).round
-        ].join(",")
-      end.join(" ")
-
-      Text.create!(text: line.text, svg_polygon_points: svg_coordinates, project_id: image.record_id)
+    @project.images.where(text_extracted: false).each do |image|
+      image.document.analyze unless image.document.analyzed?
+      lines = detected_text(image.document).blocks.select { |b| b.block_type == "LINE" }
+      save_text_data(lines, image)
+      image.update!(text_extracted: true)
     end
   end
 
   private
 
-  def detected_text
+  def save_text_data(lines, image)
+    lines.each do |line|
+      polygon_points = line.geometry.polygon.map { |p| [p.x, p.y] }
+      svg_coordinates = polygon_points.map do |p|
+        [
+          (p[0] * image.document.blob.metadata["width"]).round,
+          (p[1] * image.document.blob.metadata["height"]).round
+        ].join(",")
+      end.join(" ")
+
+      image.texts.create!(text: line.text, svg_polygon_points: svg_coordinates)
+    end
+  end
+
+  def detected_text(document)
     textract_client.detect_document_text(
       {
         document: {
-          s3_obejct: {
+          s3_object: {
             bucket: Rails.application.credentials.dig(:aws, :bucket),
-            name: image.blob.key
+            name: document.blob.key
           }
         }
       }
