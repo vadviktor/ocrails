@@ -1,7 +1,7 @@
 <% if project.images.any? %>
 
   <% target_width = BigDecimal(800) %>
-  <div x-data="{
+  <div id="project_images_with_texts_ui" x-data="{
          document_to_show: <%= project.images.processed.first.document.id %>,
          text_to_highlight: null
        }">
@@ -71,7 +71,16 @@
               <% image.texts.find_each do |text| %>
                 <li class="list-group-item"
                     x-bind:class="text_to_highlight != <%= text.id %> || 'active'">
-                  <%= text.text %>
+                  <div class="input-group">
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" checked="checked" aria-label="">
+                    </div>
+                    <input type="text" class="form-control" aria-label="" value="<%= text.text %>" readonly="readonly">
+                    <button class="btn btn-outline-secondary" type="button" id="clipboard-<%= text.id %>">
+                      <i class="bi bi-clipboard"></i>
+                    </button>
+                    <div class="d-none" id="clipboard-<%= text.id %>-text"><%= text.text %></div>
+                  </div>
                 </li>
               <% end %>
             </ul>
