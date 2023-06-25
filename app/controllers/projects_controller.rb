@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
+  before_action :get_project, only: [:show, :upload, :update, :destroy]
+
   def index
     @projects = Project.order(created_at: :desc)
     @new_project = Project.new
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def create
@@ -20,7 +21,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
     uploaded_images = project_params[:images].reject(&:blank?)
     if uploaded_images.present?
       uploaded_images.each do |ui|
@@ -35,12 +35,15 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    project = Project.find(params[:id])
-    project.destroy
+    @project.destroy
     redirect_to projects_path, status: :see_other
   end
 
   private
+
+  def get_project
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit(:name, images: [])
