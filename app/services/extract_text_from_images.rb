@@ -6,7 +6,7 @@ class ExtractTextFromImages
   end
 
   def run
-    @project.images.where(text_extracted: false).each do |image|
+    @project.images.unprocessed.each do |image|
       image.document.analyze unless image.document.analyzed?
       lines = detected_text(image.document).blocks.select { |b| b.block_type == "LINE" }
       save_text_data(lines, image)

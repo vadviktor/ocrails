@@ -10,6 +10,7 @@ class Image < ApplicationRecord
   after_validation :clean_up_documents
 
   scope :processed, -> { where(text_extracted: true) }
+  scope :unprocessed, -> { where(text_extracted: false) }
 
   private
 
