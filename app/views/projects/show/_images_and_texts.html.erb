@@ -1,3 +1,10 @@
+<% if project.images.none? %>
+  <div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No documents yet. Upload one to get started.
+  </div>
+  <% return %>
+<% end %>
+
 <% if project.images.any? %>
 
   <div id="project_images_with_texts_ui"
@@ -108,8 +115,5 @@
     <% end %>
 
   </div>
-<% else %>
-  <div class="alert alert-info">
-    <i class="bi bi-info-circle"></i> No documents yet. Upload one to get started.
-  </div>
+
 <% end %>

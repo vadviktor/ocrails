@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root "projects#index"
 
   resources :projects do
+    member do
+      get :upload
+    end
     resources :texts, only: [:show, :create, :destroy]
   end
 

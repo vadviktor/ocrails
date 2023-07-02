@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :get_project, only: [:show, :upload, :update, :destroy]
+  before_action :get_project, only: [:show, :update, :destroy, :upload]
 
   def index
     @projects = Project.order(created_at: :desc)
@@ -32,6 +32,9 @@ class ProjectsController < ApplicationController
     end
 
     redirect_to project_path(@project)
+  end
+
+  def upload
   end
 
   def destroy
