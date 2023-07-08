@@ -1,4 +1,8 @@
-<div class="project-layout">
-  <%= render partial: 'projects/show/aside', locals: { project: @project } %>
-  <%= render partial: 'projects/show/main', locals: { project: @project } %>
+<div class="project-layout"
+     x-data="{
+         document_to_show: <%= @images&.first&.id %>
+     }"
+>
+  <%= render partial: 'projects/show/aside', locals: { project: @project, images: @images } %>
+  <%= render partial: 'projects/show/main', locals: { project: @project, images: @images } %>
 </div>

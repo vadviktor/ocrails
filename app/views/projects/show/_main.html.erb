@@ -16,7 +16,7 @@
 
   <%= render partial: 'shared/errors', locals: { model: project } %>
 
-  <%= render partial: 'projects/show/images_and_texts', locals: { project: project } %>
+  <%= render partial: 'projects/show/images_and_texts', locals: { project: project, images: images } %>
 
   <div class="mt-3 d-sm-block d-md-block d-lg-none">
     <div class="alert alert-info">

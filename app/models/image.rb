@@ -1,5 +1,6 @@
 class Image < ApplicationRecord
   belongs_to :project
+  acts_as_list scope: :project
   has_many :texts, dependent: :destroy
 
   has_one_attached :document do |attachable|
@@ -11,6 +12,7 @@ class Image < ApplicationRecord
 
   scope :processed, -> { where(text_extracted: true) }
   scope :unprocessed, -> { where(text_extracted: false) }
+  scope :in_order, -> { order(position: :asc) }
 
   private
 

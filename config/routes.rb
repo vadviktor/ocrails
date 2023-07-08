@@ -10,8 +10,10 @@ Rails.application.routes.draw do
     member do
       get :upload
     end
-    resources :texts, only: [:show, :create, :destroy]
   end
+
+  get "images/:id/position_up", to: "images#position_up", as: :image_position_up
+  get "images/:id/position_down", to: "images#position_down", as: :image_position_down
 
   OCRails::Application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"

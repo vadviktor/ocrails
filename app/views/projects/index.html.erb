@@ -30,7 +30,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @projects.find_each do |project| %>
+    <% @projects.each do |project| %>
       <tr>
         <td>
           <%= link_to project_path(project), class: "btn btn-sm btn-outline-secondary text-wrap" do %>

@@ -1,25 +1,30 @@
 <aside class="project-sidebar overflow-y-scroll">
   <h3 class="mt-2 mb-3">Documents</h3>
-  <% if project.images.any? %>
-    <% project.images.processed.includes([document_attachment: :blob]).find_each do |image| %>
+  <% if images.any? %>
+    <% images.each do |image| %>
       <div class="card text-bg-secondary mb-3" style="max-width: 10rem;">
+<!--        <div class="card-header text-truncate"><%#= image.id %></div>-->
         <div class="card-header text-truncate"><%= image.document.blob.filename %></div>
         <img src="<%= image.document.variant(:thumb).processed.url %>"
              style="cursor: pointer;"
+             x-on:click="document_to_show = <%= image.document.id %>"
              class="card-img-top"
              alt=""/>
         <div class="card-footer">
           <div class="row">
+
             <div class="col-6">
-              <button type="button" class="btn btn-light">
+              <%= link_to image_position_up_path(image), class: "btn btn-light" do %>
                 <i class="bi bi-arrow-up"></i>
-              </button>
+              <% end %>
             </div>
+
             <div class="col-6">
-              <button type="button" class="btn btn-light">
+              <%= link_to image_position_down_path(image), class: "btn btn-light" do %>
                 <i class="bi bi-arrow-down"></i>
-              </button>
+              <% end %>
             </div>
+
           </div>
         </div>
       </div>

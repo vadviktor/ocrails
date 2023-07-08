@@ -1,55 +1,17 @@
-<% if project.images.none? %>
+<% if images.none? %>
   <div class="alert alert-info">
     <i class="bi bi-info-circle"></i> No documents yet. Upload one to get started.
   </div>
-  <% return %>
-<% end %>
-
-<% if project.images.any? %>
+<% else %>
 
   <div id="project_images_with_texts_ui"
        x-data="{
-         document_to_show: <%= project.images.processed.first.document.id %>,
+<!--         document_to_show: <%#= project.images.processed.first.document.id %>,-->
          text_to_highlight: null
        }">
 
-    <div class="d-none d-sm-none d-md-none d-lg-block"> <!--Don't show this on small screens-->
-      <!-- off canvas list -->
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDocuments">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title">Documents</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <% project.images.processed.includes([document_attachment: :blob]).find_each do |image| %>
-            <div class="card mb-3" style="max-width: 10rem;">
-              <div class="card-header text-wrap"><%= image.document.blob.filename %></div>
-              <img src="<%= image.document.variant(:thumb).processed.url %>"
-                   x-on:click="document_to_show = <%= image.document.id %>"
-                   style="cursor: pointer;"
-                   class="card-img-top"/>
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col-6">
-                    <button type="button" class="btn btn-outline-dark">
-                      <i class="bi bi-file-arrow-up-fill"></i>
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button type="button" class="btn btn-outline-dark">
-                      <i class="bi bi-file-arrow-down-fill"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
     <% target_width = BigDecimal(800) %>
-    <% project.images.processed.find_each do |image| %>
+    <% images.each do |image| %>
 
       <div>
 
@@ -74,7 +36,7 @@
                 <div class="img-overlay-wrap" style="width: <%= target_width %>px">
                   <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{image_display_width}px;" %>
                   <svg width="<%= image_display_width %>" height="<%= image_display_height %>">
-                    <% image.texts.find_each do |text| %>
+                    <% image.texts.each do |text| %>
                       <polygon class="svg-box"
                                x-on:click="text_to_highlight = <%= text.id %>"
                                transform="scale(<%= target_width_ratio %>)"
@@ -86,17 +48,32 @@
 
               <!-- text list-->
               <div class="col-md-12 col-xxl">
+                <h3>Recognized Texts</h3>
                 <ul class="list-group">
-                  <% image.texts.find_each do |text| %>
+                  <% image.texts.each do |text| %>
                     <li class="list-group-item"
                         x-bind:class="text_to_highlight != <%= text.id %> || 'active'">
+
                       <div class="input-group">
-                        <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" checked="checked" aria-label="">
-                        </div>
-                        <input type="text" class="form-control" aria-label="" value="<%= text.text %>" readonly="readonly">
-                        <!-- TODO: order buttons-->
+                        <span class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" checked="checked">
+                        </span>
+                        <input type="text"
+                               data-text_input_id="<%= text.id %>"
+                               class="form-control"
+                               value="<%= text.text %>"
+                               readonly="readonly">
+                        <button class="btn btn-outline-secondary" type="button">
+                          <i class="bi bi-arrow-up"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary" type="button">
+                          <i class="bi bi-arrow-down"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary" type="button" data-text_select_id="<%= text.id %>">
+                          <i class="bi bi-textarea-t"></i>
+                        </button>
                       </div>
+
                     </li>
                   <% end %>
                 </ul>

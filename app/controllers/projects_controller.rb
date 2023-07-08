@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @images = @project.images&.in_order&.processed&.includes([:texts, document_attachment: :blob])
   end
 
   def create
@@ -23,15 +24,15 @@ class ProjectsController < ApplicationController
   def update
     uploaded_images = project_params[:images].reject(&:blank?)
     if uploaded_images.present?
-      uploaded_images.each do |ui|
+      uploaded_images.each do |data|
         image = Image.new(project: @project)
-        image.document.attach(ui)
+        image.document.attach(data)
         image.save!
       end
       ExtractTextFromImagesJob.perform_now(@project.id)
     end
 
-    redirect_to project_path(@project)
+    redirect_to project_path(@project), status: :see_other
   end
 
   def upload
