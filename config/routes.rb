@@ -7,13 +7,16 @@ Rails.application.routes.draw do
   root "projects#index"
 
   resources :projects do
+    resources :images, only: %i[show] do
+      member do
+        get :position_up
+        get :position_down
+      end
+    end
     member do
       get :upload
     end
   end
-
-  get "images/:id/position_up", to: "images#position_up", as: :image_position_up
-  get "images/:id/position_down", to: "images#position_down", as: :image_position_down
 
   OCRails::Application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"

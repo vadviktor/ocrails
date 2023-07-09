@@ -1,6 +1,7 @@
 class Image < ApplicationRecord
+  include Orderable
+
   belongs_to :project
-  acts_as_list scope: :project
   has_many :texts, dependent: :destroy
 
   has_one_attached :document do |attachable|
@@ -15,6 +16,10 @@ class Image < ApplicationRecord
   scope :in_order, -> { order(position: :asc) }
 
   private
+
+  def last_position
+    project.images.maximum(:position) || 0
+  end
 
   def document_maximum_size
     if document.blob.byte_size > 5.megabytes

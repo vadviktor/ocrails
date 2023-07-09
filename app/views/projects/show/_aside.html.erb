@@ -3,24 +3,23 @@
   <% if images.any? %>
     <% images.each do |image| %>
       <div class="card text-bg-secondary mb-3" style="max-width: 10rem;">
-<!--        <div class="card-header text-truncate"><%#= image.id %></div>-->
         <div class="card-header text-truncate"><%= image.document.blob.filename %></div>
-        <img src="<%= image.document.variant(:thumb).processed.url %>"
-             style="cursor: pointer;"
-             x-on:click="document_to_show = <%= image.document.id %>"
-             class="card-img-top"
-             alt=""/>
+        <%= link_to project_image_path(image.project, image) do %>
+          <img src="<%= image.document.variant(:thumb).processed.url %>"
+               class="card-img-top"
+               alt=""/>
+        <% end %>
         <div class="card-footer">
           <div class="row">
 
             <div class="col-6">
-              <%= link_to image_position_up_path(image), class: "btn btn-light" do %>
+              <%= link_to position_up_project_image_path(image.project, image), class: "btn btn-light" do %>
                 <i class="bi bi-arrow-up"></i>
               <% end %>
             </div>
 
             <div class="col-6">
-              <%= link_to image_position_down_path(image), class: "btn btn-light" do %>
+              <%= link_to position_down_project_image_path(image.project, image), class: "btn btn-light" do %>
                 <i class="bi bi-arrow-down"></i>
               <% end %>
             </div>

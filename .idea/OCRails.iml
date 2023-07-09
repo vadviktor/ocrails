@@ -40,7 +40,6 @@
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v7.0.4.3, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activestorage (v7.0.4.3, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v7.0.4.3, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="acts_as_list (v1.1.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="amazing_print (v1.4.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v2.4.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="aws-eventstream (v1.2.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />

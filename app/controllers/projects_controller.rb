@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @images = @project.images&.in_order&.processed&.includes([:texts, document_attachment: :blob])
+    @images = @project.images&.in_order&.processed&.includes([document_attachment: :blob])
   end
 
   def create

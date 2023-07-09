@@ -3,6 +3,11 @@
          document_to_show: <%= @images&.first&.id %>
      }"
 >
-  <%= render partial: 'projects/show/aside', locals: { project: @project, images: @images } %>
-  <%= render partial: 'projects/show/main', locals: { project: @project, images: @images } %>
+  <div id="show-aside">
+    <%= render partial: 'projects/show/aside', locals: { project: @project, images: @images } %>
+  </div>
+
+  <div id="show-main">
+    <%= render partial: 'projects/show/main', locals: { project: @project, images: @images } %>
+  </div>
 </div>
