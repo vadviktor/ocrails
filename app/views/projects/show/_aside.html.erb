@@ -1,27 +1,47 @@
 <aside class="project-sidebar overflow-y-scroll">
-  <h3 class="mt-2 mb-3">Documents</h3>
+  <h5 class="mt-2 mb-3">Documents</h5>
   <% if images.any? %>
-    <% images.each do |image| %>
+    <% images.with_attached_document.each do |image| %>
       <div class="card text-bg-secondary mb-3" style="max-width: 10rem;">
-        <div class="card-header text-truncate"><%= image.document.blob.filename %></div>
+        <div class="card-header text-truncate">
+          <%= image.document.blob.filename %>
+        </div>
         <%= link_to project_image_path(image.project, image) do %>
           <img src="<%= image.document.variant(:thumb).processed.url %>"
                class="card-img-top"
-               alt=""/>
+               alt="<%= image.document.blob.filename %>"/>
         <% end %>
         <div class="card-footer">
           <div class="row">
 
             <div class="col-6">
-              <%= link_to position_up_project_image_path(image.project, image), class: "btn btn-light" do %>
+              <button type="button"
+                      class="btn btn-light"
+                      hx-get="<%= url_for(only_path: true,
+                                          controller: :images,
+                                          action: :position_up,
+                                          project_id: image.project,
+                                          id: image) %>"
+                      hx-swap="innerHTML transition:true"
+                      hx-target="#show-aside"
+              >
                 <i class="bi bi-arrow-up"></i>
-              <% end %>
+              </button>
             </div>
 
             <div class="col-6">
-              <%= link_to position_down_project_image_path(image.project, image), class: "btn btn-light" do %>
+              <button type="button"
+                      class="btn btn-light"
+                      hx-get="<%= url_for(only_path: true,
+                                          controller: :images,
+                                          action: :position_down,
+                                          project_id: image.project,
+                                          id: image) %>"
+                      hx-swap="innerHTML transition:true"
+                      hx-target="#show-aside"
+              >
                 <i class="bi bi-arrow-down"></i>
-              <% end %>
+              </button>
             </div>
 
           </div>

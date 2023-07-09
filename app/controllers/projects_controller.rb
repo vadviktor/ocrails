@@ -7,7 +7,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @images = @project.images&.in_order&.processed&.includes([document_attachment: :blob])
+    images = @project.processed_images_in_order
+    redirect_to project_image_path(@project, images.first)
   end
 
   def create

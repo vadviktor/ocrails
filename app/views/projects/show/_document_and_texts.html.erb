@@ -1,0 +1,93 @@
+<% if image.blank? %>
+  <div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No documents yet. Upload one to get started.
+  </div>
+<% else %>
+
+  <div id="project_images_with_texts_ui"
+       x-data="{
+         text_to_highlight: null
+       }">
+
+    <% target_width = BigDecimal(800) %>
+
+    <div>
+
+      <% target_width_ratio = target_width / image.document.metadata["width"] %>
+      <% image_display_width = (image.document.metadata["width"] * target_width_ratio).round %>
+      <% image_display_height = (image.document.metadata["height"] * target_width_ratio).round %>
+      <div>
+
+        <!-- Combined OCR content-->
+        <div class="row">
+          <div class="col mb-3">
+            <textarea class="form-control"
+                      rows="10"
+                      readonly="readonly"><%= image.texts.pluck(:text).join("\n").strip %></textarea>
+          </div>
+        </div>
+
+        <div class="d-none d-sm-none d-md-none d-lg-block"> <!--Don't show this on small screens-->
+          <div class="row">
+            <!-- image with svg overlay-->
+            <div class="col">
+              <div class="img-overlay-wrap" style="width: <%= target_width %>px">
+                <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{image_display_width}px;" %>
+                <svg width="<%= image_display_width %>" height="<%= image_display_height %>">
+                  <% image.texts.each do |text| %>
+                    <polygon class="svg-box"
+                             x-on:click="text_to_highlight = <%= text.id %>"
+                             transform="scale(<%= target_width_ratio %>)"
+                             points="<%= text.svg_polygon_points %>"/>
+                  <% end %>
+                </svg>
+              </div>
+            </div>
+
+            <!-- text list-->
+            <div class="col-md-12 col-xxl">
+              <h3>Recognized Texts</h3>
+              <ul class="list-group">
+                <% image.texts.each do |text| %>
+                  <li class="list-group-item"
+                      x-bind:class="text_to_highlight != <%= text.id %> || 'active'">
+
+                    <div class="input-group">
+                        <span class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" checked="checked">
+                        </span>
+                      <input type="text"
+                             data-text_input_id="<%= text.id %>"
+                             class="form-control"
+                             value="<%= text.text %>"
+                             readonly="readonly">
+                      <button class="btn btn-outline-secondary" type="button">
+                        <i class="bi bi-arrow-up"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" type="button">
+                        <i class="bi bi-arrow-down"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" type="button" data-text_select_id="<%= text.id %>">
+                        <i class="bi bi-textarea-t"></i>
+                      </button>
+                    </div>
+
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--TODO-->
+      <!--    <button type="submit" class="btn btn-sm btn-outline-danger">-->
+      <!--      <i class="bi bi-trash"></i> Delete-->
+      <!--    </button>-->
+
+    </div>
+
+  </div>
+
+<% end %>
