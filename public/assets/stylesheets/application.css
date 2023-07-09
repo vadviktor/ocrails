@@ -1,0 +1,21 @@
+:root {
+    --bs-font-sans-serif: "OpenDyslexic", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+[x-cloak] { display: none !important; }
+
+.project-layout {
+    display:grid;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: 12rem auto;
+    gap: 1.5rem
+}
+
+.project-sidebar {
+    grid-area: sidebar;
+    height: calc(100vh);
+}
+
+.project-main {
+    grid-area: main;
+}

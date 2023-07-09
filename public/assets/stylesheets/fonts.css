@@ -1,0 +1,39 @@
+﻿@font-face {
+    font-family: "OpenDyslexic";
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Regular.eot');
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Regular.eot') format('embedded-opentype'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Regular.woff2') format('woff2'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Regular.woff') format('woff');
+    /*url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Regular.ttf') format('truetype');*/
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold.eot');
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold.eot') format('embedded-opentype'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold.woff2') format('woff2'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold-Italic.eot');
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold-Italic.eot') format('embedded-opentype'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold-Italic.woff2') format('woff2'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Bold-Italic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Italic.eot');
+    src: url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Italic.eot') format('embedded-opentype'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Italic.woff2') format('woff2'),
+    url('../fonts/opendyslexic-0.910.12-rc2-2019.10.17/OpenDyslexic-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
