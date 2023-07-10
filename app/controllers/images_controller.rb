@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :get_image, only: %i[show position_up position_down]
+  before_action :get_image
 
   def show
     @project = @image.project
@@ -17,6 +17,12 @@ class ImagesController < ApplicationController
     @image.move_lower
     populate_images
     render template: "projects/show/aside", layout: false
+  end
+
+  def destroy
+    project = @image.project
+    @image.destroy
+    redirect_to project_path(project), status: :see_other
   end
 
   private

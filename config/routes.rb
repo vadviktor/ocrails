@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root "projects#index"
 
   resources :projects do
-    resources :images, only: %i[show] do
+    resources :images, only: %i[show destroy] do
       member do
         get :position_up
         get :position_down

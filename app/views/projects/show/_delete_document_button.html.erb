@@ -1,0 +1,28 @@
+<div class="d-flex" x-data="{ open: false }">
+
+  <div x-show="!open">
+    <button type="button"
+            x-on:click="open = !open"
+            class="btn btn-sm btn-danger me-3">
+      <i class="bi bi-trash"></i> Delete this page?
+    </button>
+  </div>
+
+  <div x-show="open" x-cloak>
+    <div class="d-flex">
+      <button type="button"
+              x-on:click="open = !open"
+              class="btn btn-sm btn-primary me-3">
+        <i class="bi bi-x-lg"></i> No
+      </button>
+
+      <% path = url_for(only_path: true, controller: :images, action: :destroy, project_id: image.project.id, id: image.id) %>
+      <%= form_with url: path, method: :delete do %>
+        <button type="submit" class="btn btn-sm btn-danger me-3">
+          <i class="bi bi-trash"></i> Yes
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+</div>
