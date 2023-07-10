@@ -3,7 +3,9 @@
   <% if images.any? %>
     <% images.with_attached_document.each do |image| %>
       <div class="card text-bg-secondary mb-3" style="max-width: 10rem;">
-        <div class="card-header text-truncate">
+        <div class="card-header text-truncate"
+             data-bs-toggle="tooltip"
+             data-bs-title="<%= image.document.blob.filename %>">
           <%= image.document.blob.filename %>
         </div>
         <%= link_to project_image_path(image.project, image) do %>
