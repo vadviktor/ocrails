@@ -21,7 +21,7 @@
 <%= render partial: 'shared/errors', locals: { model: @project } %>
 
 <% if @projects.present? %>
-  <table class="table table-hover table-striped">
+  <table class="table table-hover table-striped mb-5">
     <thead>
     <tr>
       <th scope="col">Name</th>
@@ -49,6 +49,22 @@
     <% end %>
     </tbody>
   </table>
+
+  <nav aria-label="Page navigation example"
+       data-bs-toggle="tooltip"
+       data-bs-title="IMPLEMENT ME">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link">Previous</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
 <% else %>
   <div class="alert alert-info">
     <i class="bi bi-info-circle"></i> No projects yet. Create one to get started.
