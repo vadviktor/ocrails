@@ -9,119 +9,32 @@
          text_to_highlight: null
        }">
 
-    <% target_width = BigDecimal(800) %>
+    <%= render partial: "projects/show/combined_text_pane", locals: { image: image } %>
 
-    <div>
-
-      <% target_width_ratio = target_width / image.document.metadata["width"] %>
-      <% image_display_width = (image.document.metadata["width"] * target_width_ratio).round %>
-      <% image_display_height = (image.document.metadata["height"] * target_width_ratio).round %>
-      <div>
-
-        <!-- Combined OCR content-->
-        <div class="row">
-          <div class="col mb-2">
-            <textarea class="form-control"
-                      rows="10"
-                      readonly="readonly"><%= image.texts.pluck(:text).join("\n").strip %></textarea>
+    <div class="d-none d-sm-none d-md-none d-lg-block"> <!--Don't show this on small screens-->
+      <div class="row">
+        <!-- image with svg overlay-->
+        <div class="col">
+          <div class="img-overlay-wrap" style="width: <%= @target_width %>px">
+            <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{@image_display_width}px;" %>
+            <svg width="<%= @image_display_width %>" height="<%= @image_display_height %>">
+              <% image.texts.each do |text| %>
+                <polygon class="svg-box"
+                         x-on:click="text_to_highlight = <%= text.id %>"
+                         transform="scale(<%= @target_width_ratio %>)"
+                         points="<%= text.svg_polygon_points %>"/>
+              <% end %>
+            </svg>
           </div>
         </div>
 
-        <div class="d-flex mb-5">
-          <div class="me-3">
-            <div class="dropdown"
-                 data-bs-toggle="tooltip"
-                 data-bs-title="IMPLEMENT ME">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                <i class="bi bi-soundwave"></i> Create audio
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">English</a></li>
-                <li><a class="dropdown-item" href="#">German</a></li>
-                <li><a class="dropdown-item" href="#">Hungarian</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
-            <button class="btn btn-dark" type="button"
-                    data-bs-toggle="tooltip"
-                    data-bs-title="IMPLEMENT ME">
-              <i class="bi bi-clipboard"></i>  Copy to clipboard
-            </button>
-          </div>
-        </div>
-
-        <div class="d-none d-sm-none d-md-none d-lg-block"> <!--Don't show this on small screens-->
-          <div class="row">
-            <!-- image with svg overlay-->
-            <div class="col">
-              <div class="img-overlay-wrap" style="width: <%= target_width %>px">
-                <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{image_display_width}px;" %>
-                <svg width="<%= image_display_width %>" height="<%= image_display_height %>">
-                  <% image.texts.each do |text| %>
-                    <polygon class="svg-box"
-                             x-on:click="text_to_highlight = <%= text.id %>"
-                             transform="scale(<%= target_width_ratio %>)"
-                             points="<%= text.svg_polygon_points %>"/>
-                  <% end %>
-                </svg>
-              </div>
-            </div>
-
-            <!-- text list-->
-            <div class="col-md-12 col-xxl">
-              <h3>Recognized Texts</h3>
-              <ul class="list-group">
-                <% image.texts.each do |text| %>
-                  <li class="list-group-item"
-                      x-bind:class="text_to_highlight != <%= text.id %> || 'active'">
-                    <div class="d-flex">
-                      <div class="pe-2">
-                        <input class="form-check-input"
-                               type="checkbox"
-                               checked="checked"
-                               data-bs-toggle="tooltip"
-                               data-bs-title="IMPLEMENT ME">
-                      </div>
-
-                      <div class="flex-grow-1 pe-2"><%= text.text %></div>
-
-                      <div class="pe-2">
-                        <button class="btn btn-dark" type="button"
-                                data-bs-toggle="tooltip"
-                                data-bs-title="IMPLEMENT ME">
-                          <i class="bi bi-arrow-up"></i>
-                        </button>
-                      </div>
-
-                      <div class="pe-2">
-                        <button class="btn btn-dark" type="button"
-                                data-bs-toggle="tooltip"
-                                data-bs-title="IMPLEMENT ME">
-                          <i class="bi bi-arrow-down"></i>
-                        </button>
-                      </div>
-
-                      <div>
-                        <button class="btn btn-dark" type="button"
-                                data-bs-toggle="tooltip"
-                                data-bs-title="IMPLEMENT ME">
-                          <i class="bi bi-clipboard"></i>
-                        </button>
-                      </div>
-
-                    </div>
-
-                  </li>
-                <% end %>
-              </ul>
-            </div>
+        <div class="col-md-12 col-xxl">
+          <div id="show-texts_list">
+            <%= render partial: "projects/show/texts_list", locals: { image: image } %>
           </div>
         </div>
 
       </div>
-
     </div>
 
   </div>

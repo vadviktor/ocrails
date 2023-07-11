@@ -6,12 +6,12 @@ module Orderable
   included do
     before_create :set_position
 
-    def set_position
-      self.position = last_position + 1
-    end
-
     def last_position
       throw NotImplementedError
+    end
+
+    def set_position
+      self.position = last_position + 1
     end
 
     def move_lower

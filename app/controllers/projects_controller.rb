@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   def show
     images = @project.processed_images_in_order
+    return redirect_to upload_project_path(@project), status: :see_other if images.blank?
     redirect_to project_image_path(@project, images.first)
   end
 

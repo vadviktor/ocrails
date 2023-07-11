@@ -7,14 +7,18 @@ Rails.application.routes.draw do
   root "projects#index"
 
   resources :projects do
+    member do
+      get :upload
+    end
+
     resources :images, only: %i[show destroy] do
       member do
         get :position_up
         get :position_down
+
+        get "texts/:text_id/position_up", to: "texts#position_up", as: :position_up_text
+        get "texts/:text_id/position_down", to: "texts#position_down", as: :position_down_text
       end
-    end
-    member do
-      get :upload
     end
   end
 

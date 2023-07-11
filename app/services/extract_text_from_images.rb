@@ -35,7 +35,7 @@ class ExtractTextFromImages
       {
         document: {
           s3_object: {
-            bucket: Rails.application.credentials.dig(:aws, :bucket),
+            bucket: "#{Rails.application.credentials.dig(:aws, :bucket)}-#{Rails.env}",
             name: document.blob.key
           }
         }
