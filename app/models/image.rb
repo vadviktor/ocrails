@@ -15,6 +15,11 @@ class Image < ApplicationRecord
   scope :unprocessed, -> { where(text_extracted: false) }
   scope :in_order, -> { order(position: :asc) }
 
+  # All the text from the image after the user has ordered the lines and decided which lines to display.
+  def full_text
+    texts.in_order.pluck(:text).join("\n")
+  end
+
   private
 
   def last_position

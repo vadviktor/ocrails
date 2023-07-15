@@ -31,6 +31,10 @@ class ImagesController < ApplicationController
     redirect_to project_path(project), status: :see_other
   end
 
+  def texts
+    render template: "projects/show/combined_text_pane", layout: false
+  end
+
   private
 
   def get_image

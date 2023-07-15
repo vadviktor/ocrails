@@ -8,8 +8,14 @@
        x-data="{
          text_to_highlight: null
        }">
-
-    <%= render partial: "projects/show/combined_text_pane", locals: { image: image } %>
+    <div hx-get="<%= url_for(only_path: true,
+                             controller: :images,
+                             action: :texts,
+                             project_id: image.project,
+                             id: image) %>"
+         hx-trigger="textUpdated from:body">
+      <%= render partial: "projects/show/combined_text_pane", locals: { image: image } %>
+    </div>
 
     <div class="d-none d-sm-none d-md-none d-lg-block"> <!--Don't show this on small screens-->
       <div class="row">
