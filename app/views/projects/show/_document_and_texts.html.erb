@@ -9,7 +9,8 @@
          text_to_highlight: null
        }">
 
-    <div hx-get="<%= url_for(only_path: true,
+    <div id="show-combined-text-pane"
+      hx-get="<%= url_for(only_path: true,
                              controller: :images,
                              action: :texts,
                              project_id: image.project,
@@ -20,18 +21,22 @@
 
     <div class="d-none d-sm-none d-md-none d-lg-block"> <!--Don't show this on small screens-->
       <div class="row">
-        <!-- image with svg overlay-->
         <div class="col">
-          <div class="img-overlay-wrap" style="width: <%= @target_width %>px">
-            <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{@image_display_width}px;" %>
-            <svg width="<%= @image_display_width %>" height="<%= @image_display_height %>">
-              <% image.texts.each do |text| %>
-                <polygon class="svg-box"
-                         x-on:click="text_to_highlight = <%= text.id %>"
-                         transform="scale(<%= @target_width_ratio %>)"
-                         points="<%= text.svg_polygon_points %>"/>
-              <% end %>
-            </svg>
+          <div id="show-image-with-overlay"
+            hx-get="<%= url_for(only_path: true,
+                                   controller: :images,
+                                   action: :overlay,
+                                   project_id: image.project,
+                                   id: image) %>"
+               hx-trigger="textUpdated from:body">
+            <%= render partial: 'projects/show/overlay',
+                       locals: {
+                         image: image,
+                         image_display_width: @image_display_width,
+                         image_display_height: @image_display_height,
+                         target_width_ratio: @target_width_ratio,
+                         target_width: @target_width,
+                       } %>
           </div>
         </div>
 

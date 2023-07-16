@@ -1,0 +1,11 @@
+<div class="img-overlay-wrap" style="width: <%= target_width %>px">
+  <%= image_tag image.document.url, class: "img-thumbnail", style: "padding: 0; width: #{image_display_width}px;" %>
+  <svg width="<%= image_display_width %>" height="<%= image_display_height %>">
+    <% image.texts.enabled.each do |text| %>
+      <polygon class="svg-box"
+               x-on:click="text_to_highlight = <%= text.id %>"
+               transform="scale(<%= target_width_ratio %>)"
+               points="<%= text.svg_polygon_points %>"/>
+    <% end %>
+  </svg>
+</div>

@@ -17,33 +17,33 @@
           <div class="row">
 
             <div class="col-6">
-              <button type="button"
-                      class="btn btn-light"
-                      hx-get="<%= url_for(only_path: true,
-                                          controller: :images,
-                                          action: :position_up,
-                                          project_id: image.project,
-                                          id: image) %>"
-                      hx-swap="innerHTML transition:true"
-                      hx-target="#show-aside"
-              >
-                <i class="bi bi-arrow-up"></i>
-              </button>
+              <%= button_tag(
+                    '<i class="bi bi-arrow-up"></i>'.html_safe,
+                    type: "button",
+                    class: "btn btn-light",
+                    "hx-get" => url_for(only_path: true,
+                                        controller: :images,
+                                        action: :position_up,
+                                        project_id: image.project,
+                                        id: image),
+                    "hx-swap" => "innerHTML transition:true",
+                    "hx-target" => "#show-aside"
+                  ) %>
             </div>
 
             <div class="col-6">
-              <button type="button"
-                      class="btn btn-light"
-                      hx-get="<%= url_for(only_path: true,
-                                          controller: :images,
-                                          action: :position_down,
-                                          project_id: image.project,
-                                          id: image) %>"
-                      hx-swap="innerHTML transition:true"
-                      hx-target="#show-aside"
-              >
-                <i class="bi bi-arrow-down"></i>
-              </button>
+              <%= button_tag(
+                    '<i class="bi bi-arrow-down"></i>'.html_safe,
+                    type: "button",
+                    class: "btn btn-light",
+                    "hx-get" => url_for(only_path: true,
+                                        controller: :images,
+                                        action: :position_down,
+                                        project_id: image.project,
+                                        id: image),
+                    "hx-swap" => "innerHTML transition:true",
+                    "hx-target" => "#show-aside"
+                  ) %>
             </div>
 
           </div>

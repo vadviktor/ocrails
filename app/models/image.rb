@@ -17,7 +17,7 @@ class Image < ApplicationRecord
 
   # All the text from the image after the user has ordered the lines and decided which lines to display.
   def full_text
-    texts.enabled.ordered.pluck(:text).join("\n")
+    texts.enabled.ordered.pluck(:text).join("\n").strip
   end
 
   private

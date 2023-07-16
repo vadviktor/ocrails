@@ -4,13 +4,13 @@ class ImagesController < ApplicationController
   def show
     @project = @image.project
     populate_images
-
-    @target_width = BigDecimal("800")
-    @target_width_ratio = @target_width / @image.document.metadata["width"]
-    @image_display_width = (@image.document.metadata["width"] * @target_width_ratio).round
-    @image_display_height = (@image.document.metadata["height"] * @target_width_ratio).round
-
+    get_image_dimensions
     render template: "projects/show"
+  end
+
+  def overlay
+    get_image_dimensions
+    render template: "projects/show/overlay", layout: false
   end
 
   def position_up
@@ -43,5 +43,12 @@ class ImagesController < ApplicationController
 
   def populate_images
     @images = @image.project.processed_images_in_order
+  end
+
+  def get_image_dimensions
+    @target_width = BigDecimal("800")
+    @target_width_ratio = @target_width / @image.document.metadata["width"]
+    @image_display_width = (@image.document.metadata["width"] * @target_width_ratio).round
+    @image_display_height = (@image.document.metadata["height"] * @target_width_ratio).round
   end
 end
