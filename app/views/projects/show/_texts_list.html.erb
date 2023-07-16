@@ -1,45 +1,58 @@
 <h3>Recognized Texts</h3>
 <ul class="list-group">
-  <% image.texts.in_order.each do |text| %>
+  <% image.texts.ordered.each do |text| %>
     <li class="list-group-item"
         x-bind:class="text_to_highlight != <%= text.id %> || 'active'">
       <div class="d-flex">
         <div class="pe-2">
-          <input class="form-check-input"
-                 type="checkbox"
-                 checked="checked"
-                 data-bs-toggle="tooltip"
-                 data-bs-title="IMPLEMENT ME">
+          <%= check_box_tag(
+                text.id,
+                text.id,
+                text.enabled?,
+                class: 'form-check-input',
+                "hx-get" => url_for(only_path: true,
+                                    controller: :texts,
+                                    action: :toggle_enabled,
+                                    project_id: image.project,
+                                    id: image,
+                                    text_id: text.id),
+                "hx-swap" => "innerHTML transition:true",
+                "hx-target" => "#show-texts_list"
+              ) %>
         </div>
 
         <div class="flex-grow-1 pe-2"><%= text.text %></div>
 
         <div class="pe-2">
-          <button class="btn btn-dark" type="button"
-                  hx-get="<%= url_for(only_path: true,
-                                      controller: :texts,
-                                      action: :position_up,
-                                      project_id: image.project,
-                                      id: image,
-                                      text_id: text.id) %>"
-                  hx-swap="innerHTML transition:true"
-                  hx-target="#show-texts_list">
-            <i class="bi bi-arrow-up"></i>
-          </button>
+          <%= button_tag(
+                '<i class="bi bi-arrow-up"></i>'.html_safe,
+                type: "button",
+                class: "btn btn-dark",
+                "hx-get" => url_for(only_path: true,
+                                    controller: :texts,
+                                    action: :position_up,
+                                    project_id: image.project,
+                                    id: image,
+                                    text_id: text.id),
+                "hx-swap" => "innerHTML transition:true",
+                "hx-target" => "#show-texts_list"
+              ) %>
         </div>
 
         <div class="pe-2">
-          <button class="btn btn-dark" type="button"
-                  hx-get="<%= url_for(only_path: true,
-                                      controller: :texts,
-                                      action: :position_down,
-                                      project_id: image.project,
-                                      id: image,
-                                      text_id: text.id) %>"
-                  hx-swap="innerHTML transition:true"
-                  hx-target="#show-texts_list">
-            <i class="bi bi-arrow-down"></i>
-          </button>
+          <%= button_tag(
+                '<i class="bi bi-arrow-down"></i>'.html_safe,
+                type: "button",
+                class: "btn btn-dark",
+                "hx-get" => url_for(only_path: true,
+                                    controller: :texts,
+                                    action: :position_down,
+                                    project_id: image.project,
+                                    id: image,
+                                    text_id: text.id),
+                "hx-swap" => "innerHTML transition:true",
+                "hx-target" => "#show-texts_list"
+              ) %>
         </div>
 
         <div>

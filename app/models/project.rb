@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   before_validation :generate_internal_id
 
   def processed_images_in_order
-    images&.in_order&.processed
+    images&.ordered&.processed
   end
 
   private

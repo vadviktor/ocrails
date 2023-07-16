@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
         get "texts/:text_id/position_up", to: "texts#position_up", as: :position_up_text
         get "texts/:text_id/position_down", to: "texts#position_down", as: :position_down_text
+        get "texts/:text_id/toggle_enabled", to: "texts#toggle_enabled", as: :toggle_enabled_text
       end
     end
   end

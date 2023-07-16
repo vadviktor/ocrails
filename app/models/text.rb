@@ -1,10 +1,12 @@
 class Text < ApplicationRecord
   include Orderable
+  include Enableable
+
   belongs_to :image
 
   validates :text, :svg_polygon_points, presence: true
 
-  scope :in_order, -> { order(position: :asc) }
+  scope :ordered, -> { order(position: :asc) }
 
   private
 
