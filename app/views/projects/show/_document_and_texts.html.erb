@@ -6,11 +6,15 @@
 
   <div id="project_images_with_texts_ui"
        x-data="{
-         text_to_highlight: null
+         text_to_highlight: null,
+         text_to_go_to(text_id) {
+           this.text_to_highlight = text_id;
+           window.location.assign(`#recognized-text-${text_id}`);
+         },
        }">
 
     <div id="show-combined-text-pane"
-      hx-get="<%= url_for(only_path: true,
+         hx-get="<%= url_for(only_path: true,
                              controller: :images,
                              action: :texts,
                              project_id: image.project,
@@ -23,7 +27,7 @@
       <div class="row">
         <div class="col">
           <div id="show-image-with-overlay"
-            hx-get="<%= url_for(only_path: true,
+               hx-get="<%= url_for(only_path: true,
                                    controller: :images,
                                    action: :overlay,
                                    project_id: image.project,
@@ -41,7 +45,9 @@
         </div>
 
         <div class="col-md-12 col-xxl">
-          <div id="show-texts_list">
+          <div id="show-texts_list"
+               style="height: <%= @image_display_height %>px; min-height: 500px; min-width: 500px;"
+               class="overflow-y-scroll">
             <%= render partial: "projects/show/texts_list", locals: { image: image } %>
           </div>
         </div>

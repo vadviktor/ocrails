@@ -1,7 +1,8 @@
 <h3>Recognized Texts</h3>
 <ul class="list-group">
   <% image.texts.ordered.each do |text| %>
-    <li class="list-group-item"
+    <li id="recognized-text-<%= text.id %>"
+        class="list-group-item"
         x-bind:class="text_to_highlight != <%= text.id %> || 'active'">
       <div class="d-flex">
         <div class="pe-2">

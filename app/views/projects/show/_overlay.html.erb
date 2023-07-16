@@ -3,7 +3,7 @@
   <svg width="<%= image_display_width %>" height="<%= image_display_height %>">
     <% image.texts.enabled.each do |text| %>
       <polygon class="svg-box"
-               x-on:click="text_to_highlight = <%= text.id %>"
+               x-on:click="text_to_go_to(<%= text.id %>)"
                transform="scale(<%= target_width_ratio %>)"
                points="<%= text.svg_polygon_points %>"/>
     <% end %>
