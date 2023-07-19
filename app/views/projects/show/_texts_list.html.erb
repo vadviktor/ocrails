@@ -57,11 +57,10 @@
         </div>
 
         <div>
-          <button class="btn btn-dark" type="button"
-                  data-bs-toggle="tooltip"
-                  data-bs-title="⚠️NOT IMPLEMENTED">
+          <button class="btn btn-dark" type="button" id="clipboard-<%= text.id %>">
             <i class="bi bi-clipboard"></i>
           </button>
+          <div class="d-none" id="clipboard-<%= text.id %>-text"><%= text.text %></div>
         </div>
 
       </div>
