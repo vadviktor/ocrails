@@ -25,6 +25,7 @@ module OCRails
 
     config.hosts << /.*\.devtunnels\.ms/
     config.hosts << /.*\.ngrok-free\.app/
+    config.hosts << /.*\.vadviktor\.xyz/
 
     # Configuration for the application, engines, and railties goes here.
     #
