@@ -4,18 +4,15 @@
 
 [x-cloak] { display: none !important; }
 
-.project-layout {
-    display:grid;
-    grid-template-areas: "sidebar main";
-    grid-template-columns: 12rem auto;
-    gap: 1.5rem
+#show-aside {
+    position: fixed;
+    width: 12rem;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
 }
 
-.project-sidebar {
-    grid-area: sidebar;
-    height: calc(100vh);
-}
-
-.project-main {
-    grid-area: main;
+#show-main {
+    position: relative;
+    margin-left: 13rem;
 }
