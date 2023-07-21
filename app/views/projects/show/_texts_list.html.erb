@@ -26,7 +26,7 @@
 
         <div class="pe-2">
           <%= button_tag(
-                '<i class="bi bi-arrow-up"></i>'.html_safe,
+                content_tag(:i, "", class: "bi bi-arrow-up"),
                 type: "button",
                 class: "btn btn-dark",
                 "hx-get" => url_for(only_path: true,
@@ -42,7 +42,7 @@
 
         <div class="pe-2">
           <%= button_tag(
-                '<i class="bi bi-arrow-down"></i>'.html_safe,
+                content_tag(:i, "", class: "bi bi-arrow-down"),
                 type: "button",
                 class: "btn btn-dark",
                 "hx-get" => url_for(only_path: true,
@@ -57,9 +57,13 @@
         </div>
 
         <div>
-          <button class="btn btn-dark" type="button" id="clipboard-<%= text.id %>">
-            <i class="bi bi-clipboard"></i>
-          </button>
+          <%= button_tag(
+                content_tag(:i, "", class: "bi bi-clipboard"),
+                type: "button",
+                id: "clipboard-#{text.id}",
+                class: "btn btn-dark",
+                "x-on:click" => "copyToClipboard",
+                ) %>
           <div class="d-none" id="clipboard-<%= text.id %>-text"><%= text.text %></div>
         </div>
 

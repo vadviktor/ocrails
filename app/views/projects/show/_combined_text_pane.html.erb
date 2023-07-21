@@ -11,26 +11,27 @@
 </div>
 
 <div class="d-flex mb-5">
-  <div class="me-3">
-    <div class="dropdown"
-         data-bs-toggle="tooltip"
-         data-bs-title="⚠️NOT IMPLEMENTED">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        <i class="bi bi-soundwave"></i> Create audio
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">English</a></li>
-        <li><a class="dropdown-item" href="#">German</a></li>
-        <li><a class="dropdown-item" href="#">Hungarian</a></li>
-      </ul>
-    </div>
-  </div>
+  <!--  <div class="me-3">-->
+  <!--    <div class="dropdown"-->
+  <!--         data-bs-toggle="tooltip"-->
+  <!--         data-bs-title="⚠️NOT IMPLEMENTED">-->
+  <!--      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">-->
+  <!--        <i class="bi bi-soundwave"></i> Create audio-->
+  <!--      </button>-->
+  <!--      <ul class="dropdown-menu">-->
+  <!--        <li><a class="dropdown-item" href="#">English</a></li>-->
+  <!--        <li><a class="dropdown-item" href="#">German</a></li>-->
+  <!--        <li><a class="dropdown-item" href="#">Hungarian</a></li>-->
+  <!--      </ul>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
   <div>
     <button class="btn btn-dark" type="button"
-            data-bs-toggle="tooltip"
-            data-bs-title="⚠️NOT IMPLEMENTED">
-      <i class="bi bi-clipboard"></i>  Copy to clipboard
+            x-on:click="copyToClipboard"
+            id="clipboard-000">
+      <i class="bi bi-clipboard"></i> Copy to clipboard
     </button>
+    <div class="d-none" id="clipboard-000-text"><%= image.full_text %></div>
   </div>
 </div>

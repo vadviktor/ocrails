@@ -18,7 +18,7 @@
 
             <div class="col-6">
               <%= button_tag(
-                    '<i class="bi bi-arrow-up"></i>'.html_safe,
+                    content_tag(:i, "", class: "bi bi-arrow-up"),
                     type: "button",
                     class: "btn btn-light",
                     "hx-get" => url_for(only_path: true,
@@ -33,7 +33,7 @@
 
             <div class="col-6">
               <%= button_tag(
-                    '<i class="bi bi-arrow-down"></i>'.html_safe,
+                    content_tag(:i, "", class: "bi bi-arrow-down"),
                     type: "button",
                     class: "btn btn-light",
                     "hx-get" => url_for(only_path: true,
