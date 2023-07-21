@@ -1,8 +1,9 @@
-// does not work on documents sidebar after reload
-document.addEventListener("DOMContentLoaded", function () {
+let loadTooltips = () => {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-});
+}
+document.addEventListener("DOMContentLoaded", loadTooltips);
+htmx.on("htmx:load", loadTooltips);
 
 
 let copyToClipboard = (e) => {
