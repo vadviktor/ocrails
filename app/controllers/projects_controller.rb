@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :get_project, only: [:show, :update, :destroy, :upload]
 
   def index
-    @projects = Project.order(created_at: :desc)
+    @projects = Project.order(created_at: :desc).page params[:page]
     @new_project = Project.new
   end
 

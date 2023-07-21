@@ -1,0 +1,5 @@
+<li class="page-item">
+  <%= link_to_unless current_page.last?,
+                     content_tag(:i, "", class: 'bi bi-chevron-right'),
+                     url, rel: 'next', remote: remote, class: 'page-link' %>
+</li>
