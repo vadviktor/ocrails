@@ -27,9 +27,9 @@ class Image < ApplicationRecord
   end
 
   def document_maximum_size
-    if document.blob.byte_size > 5.megabytes
-      errors.add(:document, "Image #{document.filename} is too big")
-    end
+    return unless document.blob.byte_size > 5.megabytes
+
+    errors.add(:document, "Image #{document.filename} is too big")
   end
 
   def clean_up_documents

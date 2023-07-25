@@ -66,10 +66,6 @@
     <orderEntry type="library" scope="PROVIDED" name="irb (v1.6.4, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jmespath (v1.6.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v2.6.3, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="kaminari (v1.2.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="kaminari-actionview (v1.2.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="kaminari-activerecord (v1.2.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="kaminari-core (v1.2.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="language_server-protocol (v3.17.0.3, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="lint_roller (v1.0.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.21.3, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />

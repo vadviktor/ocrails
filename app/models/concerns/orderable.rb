@@ -16,22 +16,24 @@ module Orderable
 
     def move_lower
       return if position == last_position
+
       next_element = self.class.find_by(position: position + 1)
       return if next_element.blank?
 
       ActiveRecord::Base.transaction do
-        next_element.update!(position: position)
+        next_element.update!(position:)
         update!(position: position + 1)
       end
     end
 
     def move_higher
       return if position == 0
+
       previous_element = self.class.find_by(position: position - 1)
       return if previous_element.blank?
 
       ActiveRecord::Base.transaction do
-        previous_element.update!(position: position)
+        previous_element.update!(position:)
         update!(position: position - 1)
       end
     end

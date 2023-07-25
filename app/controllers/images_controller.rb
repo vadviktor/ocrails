@@ -5,24 +5,24 @@ class ImagesController < ApplicationController
     @project = @image.project
     populate_images
     get_image_dimensions
-    render template: "projects/show"
+    render template: 'projects/show'
   end
 
   def overlay
     get_image_dimensions
-    render template: "projects/show/overlay", layout: false
+    render template: 'projects/show/overlay', layout: false
   end
 
   def position_up
     @image.move_higher
     populate_images
-    render template: "projects/show/aside", layout: false
+    render template: 'projects/show/aside', layout: false
   end
 
   def position_down
     @image.move_lower
     populate_images
-    render template: "projects/show/aside", layout: false
+    render template: 'projects/show/aside', layout: false
   end
 
   def destroy
@@ -32,7 +32,7 @@ class ImagesController < ApplicationController
   end
 
   def texts
-    render template: "projects/show/combined_text_pane", layout: false
+    render template: 'projects/show/combined_text_pane', layout: false
   end
 
   private
@@ -46,9 +46,9 @@ class ImagesController < ApplicationController
   end
 
   def get_image_dimensions
-    @target_width = BigDecimal("800")
-    @target_width_ratio = @target_width / @image.document.metadata["width"]
-    @image_display_width = (@image.document.metadata["width"] * @target_width_ratio).round
-    @image_display_height = (@image.document.metadata["height"] * @target_width_ratio).round
+    @target_width = BigDecimal('800')
+    @target_width_ratio = @target_width / @image.document.metadata['width']
+    @image_display_width = (@image.document.metadata['width'] * @target_width_ratio).round
+    @image_display_height = (@image.document.metadata['height'] * @target_width_ratio).round
   end
 end

@@ -1,4 +1,4 @@
-require "aws-sdk-textract"
+require 'aws-sdk-textract'
 
 class ExtractTextFromImages
   def initialize(project_id)
@@ -8,7 +8,7 @@ class ExtractTextFromImages
   def run
     @project.images.unprocessed.each do |image|
       image.document.analyze unless image.document.analyzed?
-      lines = detected_text(image.document).blocks.select { |b| b.block_type == "LINE" }
+      lines = detected_text(image.document).blocks.select { |b| b.block_type == 'LINE' }
       save_text_data(lines, image)
       image.update!(text_extracted: true)
     end
@@ -21,10 +21,10 @@ class ExtractTextFromImages
       polygon_points = line.geometry.polygon.map { |p| [p.x, p.y] }
       svg_coordinates = polygon_points.map do |p|
         [
-          (p[0] * image.document.blob.metadata["width"]).round,
-          (p[1] * image.document.blob.metadata["height"]).round
-        ].join(",")
-      end.join(" ")
+          (p[0] * image.document.blob.metadata['width']).round,
+          (p[1] * image.document.blob.metadata['height']).round
+        ].join(',')
+      end.join(' ')
 
       image.texts.create!(text: line.text, svg_polygon_points: svg_coordinates)
     end

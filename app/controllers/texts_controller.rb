@@ -30,10 +30,10 @@ class TextsController < ApplicationController
   end
 
   def render_template
-    render template: "projects/show/texts_list", layout: false
+    render template: 'projects/show/texts_list', layout: false
   end
 
   def trigger_htmx
-    response.set_header("HX-Trigger", "textUpdated")
+    response.set_header('HX-Trigger', 'textUpdated')
   end
 end

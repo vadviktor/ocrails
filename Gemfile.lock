@@ -125,8 +125,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    language_server-protocol (3.17.0.3)
-    lint_roller (1.0.0)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -225,20 +223,6 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
-    standard (1.28.2)
-      language_server-protocol (~> 3.17.0.2)
-      lint_roller (~> 1.0)
-      rubocop (~> 1.50.2)
-      standard-custom (~> 1.0.0)
-      standard-performance (~> 1.0.1)
-    standard-custom (1.0.0)
-      lint_roller (~> 1.0)
-    standard-performance (1.0.1)
-      lint_roller (~> 1.0)
-      rubocop-performance (~> 1.16.0)
-    standard-rails (0.1.0)
-      lint_roller (~> 1.0)
-      rubocop-rails (~> 2.19.0)
     thor (1.2.2)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -270,10 +254,10 @@ DEPENDENCIES
   puma
   rack-mini-profiler
   rails
+  rubocop
+  rubocop-performance
+  rubocop-rails
   sidekiq
-  standard
-  standard-performance
-  standard-rails
   tzinfo-data
   web-console
 

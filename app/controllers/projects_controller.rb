@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :get_project, only: [:show, :update, :destroy, :upload]
+  before_action :project, only: %i[show update destroy upload]
 
   def index
     @projects = Project.order(created_at: :desc).page params[:page]
@@ -38,8 +38,7 @@ class ProjectsController < ApplicationController
     redirect_to project_path(@project), status: :see_other
   end
 
-  def upload
-  end
+  def upload; end
 
   def destroy
     @project.destroy
@@ -48,7 +47,7 @@ class ProjectsController < ApplicationController
 
   private
 
-  def get_project
+  def project
     @project = Project.find(params[:id])
   end
 
