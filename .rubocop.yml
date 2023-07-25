@@ -1,0 +1,19 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - '.git/**/*'
+    - '.vscode/**/*'
+    - 'db/schema.rb'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  TargetRubyVersion: 3.2.2
+
+Style/Documentation:
+  Enabled: false

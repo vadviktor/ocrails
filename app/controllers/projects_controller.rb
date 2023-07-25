@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    uploaded_images = project_params[:images].reject(&:blank?)
+    uploaded_images = project_params[:images].compact_blank
     if uploaded_images.present?
       uploaded_images.each do |data|
         image = Image.new(project: @project)
