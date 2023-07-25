@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 class ImagesController < ApplicationController
-  before_action :get_image
+  before_action :image
 
   def show
     @project = @image.project
     populate_images
-    get_image_dimensions
+    image_dimensions
     render template: 'projects/show'
   end
 
   def overlay
-    get_image_dimensions
+    image_dimensions
     render template: 'projects/show/overlay', layout: false
   end
 
@@ -39,7 +39,7 @@ class ImagesController < ApplicationController
 
   private
 
-  def get_image
+  def image
     @image = Image.find(params[:id])
   end
 
@@ -47,7 +47,7 @@ class ImagesController < ApplicationController
     @images = @image.project.processed_images_in_order
   end
 
-  def get_image_dimensions
+  def image_dimensions
     @target_width = BigDecimal('800')
     @target_width_ratio = @target_width / @image.document.metadata['width']
     @image_display_width = (@image.document.metadata['width'] * @target_width_ratio).round

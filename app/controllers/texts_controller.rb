@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TextsController < ApplicationController
-  before_action :get_text, :get_image
+  before_action :text, :image
 
   def position_up
     @text.move_higher
@@ -23,11 +23,11 @@ class TextsController < ApplicationController
 
   private
 
-  def get_text
+  def text
     @text = Text.find(params[:text_id])
   end
 
-  def get_image
+  def image
     @image = Image.find(params[:id])
   end
 

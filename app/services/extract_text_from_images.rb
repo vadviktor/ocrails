@@ -46,7 +46,7 @@ class ExtractTextFromImages
   end
 
   def textract_client
-    @_textract_client ||= Aws::Textract::Client.new(
+    @textract_client ||= Aws::Textract::Client.new(
       region: Rails.application.credentials.dig(:aws, :region),
       credentials: Aws::Credentials.new(
         Rails.application.credentials.dig(:aws, :access_key_id),
