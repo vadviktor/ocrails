@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
         image.document.attach(data)
         image.save!
       end
-      ExtractTextFromImagesJob.perform_now(@project.id)
+      ExtractTextFromImagesJob.perform_later(@project.id)
     end
 
     redirect_to project_path(@project), status: :see_other
