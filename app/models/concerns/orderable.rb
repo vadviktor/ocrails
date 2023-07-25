@@ -27,7 +27,7 @@ module Orderable
     end
 
     def move_higher
-      return if position == 0
+      return if position.zero?
 
       previous_element = self.class.find_by(position: position - 1)
       return if previous_element.blank?

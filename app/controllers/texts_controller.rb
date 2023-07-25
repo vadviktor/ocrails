@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextsController < ApplicationController
   before_action :get_text, :get_image
 
