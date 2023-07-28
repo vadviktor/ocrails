@@ -1,22 +1,17 @@
-<nav class="navbar bg-light mb-3">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="/favicon.png" width="24" height="24">
-    </a>
+<% content_for :navbar do %>
+  <%= form_with model: @new_project, class: "d-flex" do |form| %>
+    <div class="input-group has-validation">
+      <%= form.text_field :name,
+                          class: "form-control me-2 #{@project&.errors&.any? { |e| e.attribute == :internal_id } ? 'is-invalid' : ''}",
+                          placeholder: "Enter name...", required: true %>
+    </div>
 
-    <%= form_with model: @new_project, class: "d-flex" do |form| %>
-      <div class="input-group has-validation">
-        <%= form.text_field :name,
-                            class: "form-control me-2 #{@project&.errors&.any? { |e| e.attribute == :internal_id } ? 'is-invalid' : ''}",
-                            placeholder: "Enter name...", required: true %>
-      </div>
-
-      <button class="btn btn-primary text-nowrap" type="submit">
-        <i class="bi bi-journal-plus"></i> New project
-      </button>
-    <% end %>
-  </div>
-</nav>
+    <button class="btn btn-primary text-nowrap" type="submit">
+      <i class="bi bi-journal-plus"></i> New project
+    </button>
+  <% end %>
+<% end %>
+<%= render partial: "shared/navbar" %>
 
 <%= render partial: 'shared/errors', locals: { model: @project } %>
 

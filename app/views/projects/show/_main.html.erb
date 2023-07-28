@@ -1,19 +1,14 @@
 <main>
-  <nav class="navbar bg-light mb-3">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <img src="/favicon.png" width="24" height="24" class="me-3" alt="">
-      </a>
+  <% content_for :navbar do %>
+    <span class="navbar-brand me-auto"><%= project.name %></span>
 
-      <span class="navbar-brand me-auto"><%= project.name %></span>
+    <%= render partial: 'projects/show/delete_document_button', locals: { image: image } %>
 
-      <%= render partial: 'projects/show/delete_document_button', locals: { image: image } %>
-
-      <%= link_to upload_project_path(project), class: "nav-link me-3" do %>
-        <i class="bi bi-plus-square-fill"></i> Add pages
-      <% end %>
-    </div>
-  </nav>
+    <%= link_to upload_project_path(project), class: "nav-link me-3" do %>
+      <i class="bi bi-plus-square-fill"></i> Add pages
+    <% end %>
+  <% end %>
+  <%= render partial: "shared/navbar" %>
 
   <%= render partial: 'shared/errors', locals: { model: project } %>
 

@@ -1,4 +1,4 @@
-<% if model&.errors.present? %>
+<% if defined?(model) && model&.errors.present? %>
   <div class="alert alert-danger" role="alert">
     <h4 class="alert-heading">
       <i class="bi bi-exclamation-triangle-fill me-2"></i> Error
@@ -10,4 +10,8 @@
       <% end %>
     </ul>
   </div>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="alert alert-danger" role="alert"><%= flash[:error] %></div>
 <% end %>

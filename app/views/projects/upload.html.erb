@@ -1,12 +1,9 @@
-<nav class="navbar bg-light mb-3">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="/favicon.png" width="24" height="24" class="me-3" alt="">
-    </a>
+<% content_for :navbar do %>
+  <%= link_to @project.name, project_path(@project), class: "navbar-brand me-auto" %>
+<% end %>
+<%= render partial: "shared/navbar" %>
 
-    <%= link_to @project.name, project_path(@project), class: "navbar-brand me-auto" %>
-  </div>
-</nav>
+<%= render partial: 'shared/errors' %>
 
 <div>
   <%= form_with model: @project, class: "mb-3" do |f| %>

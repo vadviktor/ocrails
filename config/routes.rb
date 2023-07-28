@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :projects do
     member do
       get :upload
+      get :upload_progress
+      get :upload_progress_poll
     end
 
     resources :images, only: %i[show destroy] do

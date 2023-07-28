@@ -8,9 +8,10 @@ class ExtractTextFromImages
   end
 
   def run
-    @project.images.unprocessed.each do |image|
-      image.document.analyze unless image.document.analyzed?
-      lines = detected_text(image.document).blocks.select { |b| b.block_type == 'LINE' }
+    @project.images.includes(%i[document_attachment]).unprocessed.each do |image|
+      document = image.document
+      document.analyze unless document.analyzed?
+      lines = detected_text(document).blocks.select { |b| b.block_type == 'LINE' }
       save_text_data(lines, image)
       image.update!(text_extracted: true)
     end
