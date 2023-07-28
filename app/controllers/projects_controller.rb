@@ -22,11 +22,7 @@ class ProjectsController < ApplicationController
 
   def upload_progress_poll
     upload_progress_state
-    if @image_count == @processed_image_count
-      return redirect_to project_image_path(@project, @project.processed_images_in_order.first), status: :see_other
-    end
-
-    render template: 'projects/upload_progress', layout: false
+    render template: 'projects/upload_progress/ocr_processing_progress', layout: false
   end
 
   def create

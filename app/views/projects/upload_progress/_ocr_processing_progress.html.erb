@@ -1,12 +1,14 @@
-<div hx-get="<%= url_for(only_path: true,
-                         controller: :projects,
-                         action: :upload_progress_poll,
-                         project_id: project) %>"
-     hx-trigger="load delay:3s"
-     hx-swap="ocr-processing-progress-container"
->
-  <h3>Images are being processed</h3>
-
+<% if processed_image_count == image_count %>
+  <div>
+<% else %>
+  <div hx-get="<%= url_for(only_path: true,
+                           controller: :projects,
+                           action: :upload_progress_poll,
+                           project_id: project) %>"
+       hx-trigger="load delay:2s"
+       hx-swap="outerHTML"
+  >
+<% end %>
   <div class="progress"
        role="progressbar"
        aria-label="Animated striped example"
@@ -19,3 +21,12 @@
     </div>
   </div>
 </div>
+
+<% if processed_image_count == image_count %>
+  <script>
+      window.location.href = "<%= url_for(only_path: true,
+                                        controller: :projects,
+                                        action: :show,
+                                        project_id: project) %>";
+  </script>
+<% end %>
