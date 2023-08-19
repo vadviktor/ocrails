@@ -36,6 +36,7 @@ docker \
   --detach \
   --name ocr-rails \
   --network rpi-services \
+  --restart=always \
   -p 0.0.0.0:3000:3000/tcp \
   -e RAILS_MASTER_KEY="" \
   -e REDIS_URL="redis://redis:6379/1" \
@@ -51,6 +52,7 @@ docker \
   --detach \
   --name ocr-sidekiq \
   --network rpi-services \
+  --restart=always \
   -e RAILS_MASTER_KEY="" \
   -e REDIS_URL="redis://redis:6379/1" \
   -e DATABASE_URL="postgres://dbuser:dbpassword@postgres:5432/OCRails_production" \
