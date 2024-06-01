@@ -1,0 +1,31 @@
+services:
+  redis:
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    restart: unless-stopped
+  dev:
+    image: ruby:3.2.2
+    volumes:
+      - app:/app
+    ports:
+      - "34567:3000"
+    environment:
+      RAILS_ENV: development
+      RAILS_SERVE_STATIC_FILES: 1
+    restart: unless-stopped
+    init: true
+    command: sleep infinity
+
+volumes:
+  app:
+  redis_data:
+  pg_data:
