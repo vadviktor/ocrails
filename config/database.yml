@@ -9,7 +9,7 @@ development: &development
   <<: *default
   database: OCRails_development
 
-  host: 192.168.1.222
+  host: postgres
   port: 5432
   username: dbuser
   password: dbpassword

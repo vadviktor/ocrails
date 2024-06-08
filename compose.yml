@@ -35,3 +35,6 @@ services:
 volumes:
   redis_data:
   pg_data:
+
+networks:
+  ocrails:

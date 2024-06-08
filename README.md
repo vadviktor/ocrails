@@ -20,7 +20,8 @@ rails new OCRails \
 ## For ActiveStorage:
 
 ```shell
-sudo apt-get install libvips libvips-dev libvips-tools
+apt update
+apt install -y libvips libvips-dev libvips-tools
 ```
 
 ## Docker
@@ -28,7 +29,10 @@ sudo apt-get install libvips libvips-dev libvips-tools
 ### Dev
 
 ```shell
-docker run -p 34567:3000 -e RAILS_SERVE_STATIC_FILES=1 --name ocrails -d --restart=unless-stopped ruby:3.2.2 sleep infinity
+bundle
+rails db:setup
+rails s -b 0.0.0.0
+sidekiq
 ```
 
 ### Prod
