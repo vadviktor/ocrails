@@ -4,6 +4,8 @@ services:
     volumes:
       - redis_data:/data
     restart: unless-stopped
+    networks:
+      - ocrails
   postgres:
     image: postgres:latest
     environment:
@@ -12,20 +14,24 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - ocrails
   dev:
-    image: ruby:3.2.2
+    image: ruby:3.3.2
     volumes:
-      - app:/app
+      - .:/app
     ports:
       - "34567:3000"
+    networks:
+      - ocrails
     environment:
       RAILS_ENV: development
       RAILS_SERVE_STATIC_FILES: 1
+      REDIS_URL: "redis://redis:6379"
     restart: unless-stopped
     init: true
     command: sleep infinity
 
 volumes:
-  app:
   redis_data:
   pg_data:

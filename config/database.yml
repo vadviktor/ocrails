@@ -9,8 +9,8 @@ development: &development
   <<: *default
   database: OCRails_development
 
-  host: localhost
-  port: 25432
+  host: 192.168.1.222
+  port: 5432
   username: dbuser
   password: dbpassword
 
